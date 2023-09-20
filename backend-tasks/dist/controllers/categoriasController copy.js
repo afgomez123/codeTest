@@ -31,16 +31,9 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 }));
 // Crear una nueva tarea
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id, } = req.body;
+    const { description, completed } = req.body;
     try {
-        const taskId = yield taskModel_1.TaskModel.createTask({
-            titulo,
-            descripcion,
-            fecha_limite,
-            completada,
-            categoria_id,
-            usuario_id,
-        });
+        const taskId = yield taskModel_1.TaskModel.createTask({ description, completed });
         res.status(201).json({ message: "Tarea creada con éxito", id: taskId });
     }
     catch (error) {
@@ -48,36 +41,17 @@ router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).json({ error: "Error al crear la tarea." });
     }
 }));
-// Actualizar una tarea
-router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const taskId = req.params.id;
-    const { titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id, } = req.body;
-    try {
-        // Verificar si la tarea existe antes de intentar actualizarla
-        const taskExists = yield taskModel_1.TaskModel.taskExists(taskId);
-        if (taskExists.length >= 1) {
-            // La tarea existe, proceder con la actualización
-            yield taskModel_1.TaskModel.updateTask({
-                taskId,
-                titulo,
-                descripcion,
-                fecha_limite,
-                completada,
-                categoria_id,
-                usuario_id,
-            });
-            res.json({ message: "Tarea actualizada con éxito", id: taskId });
-        }
-        else {
-            // La tarea no existe
-            res.status(404).json({ error: "La tarea no existe." });
-        }
-    }
-    catch (error) {
-        console.error("Error al actualizar la tarea", error);
-        res.status(500).json({ error: "Error al actualizar la tarea." });
-    }
-}));
+// // Eliminar una tarea
+// router.delete('/:id', async (req, res) => {
+//   const taskId = req.params.id;
+//   try {
+//     await TaskModel.deleteTask(taskId);
+//     res.json({ message: 'Tarea eliminada con éxito', id: taskId });
+//   } catch (error) {
+//     console.error('Error al eliminar la tarea', error);
+//     res.status(500).json({ error: 'Error al eliminar la tarea.' });
+//   }
+// });
 // Eliminar una tarea
 router.delete("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const taskId = req.params.id;

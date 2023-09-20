@@ -1,55 +1,5 @@
-// // src/models/taskModel.ts
-// import mysql, { RowDataPacket } from 'mysql2/promise';
-
-// class TaskModel {
-//   private static async getDbConnection() {
-//     return mysql.createConnection({
-//       host: 'localhost',
-//       user: 'root',
-//       password: '',
-//       database: 'tareas',
-//     });
-//   }
-
-//   static async getAllTasks() {
-//     const connection = await this.getDbConnection();
-//     try {
-//       const [rows] = await connection.execute('SELECT * FROM tareas');
-//       return rows as RowDataPacket[]; // Hacer una comprobación de tipo
-//     } finally {
-//       connection.end(); // Cierra la conexión después de usarla
-//     }
-//   }
-
-//   static async createTask({ description, completed }: { description: string; completed: boolean }) {
-//     const connection = await this.getDbConnection();
-//     try {
-//       const [result] = await connection.execute('INSERT INTO tareas (titulo, descripcion, completada) VALUES (?, ?)', [description, completed]);
-//       if (result && 'insertId' in result) {
-//         return result.insertId as number;
-//       } else {
-//         throw new Error('No se pudo obtener el ID de inserción.');
-//       }
-//     } finally {
-//       connection.end(); // Cierra la conexión después de usarla
-//     }
-//   }
-
-//   static async deleteTask(id: string) {
-//     const connection = await this.getDbConnection();
-//     try {
-//       await connection.execute('DELETE FROM tareas WHERE tarea_id = ?', [id]);
-//     } finally {
-//       connection.end(); // Cierra la conexión después de usarla
-//     }
-//   }
-// }
-
-// export { TaskModel };
-
-// src/models/taskModel.ts
 import { RowDataPacket } from "mysql2/promise";
-import { Database } from "../utils/Database";
+import { Database } from "../utils/database";
 
 class TaskModel {
   static async getAllTasks() {
@@ -63,17 +13,32 @@ class TaskModel {
   }
 
   static async createTask({
-    description,
-    completed,
+    titulo,
+    descripcion,
+    fecha_limite,
+    completada,
+    categoria_id,
+    usuario_id,
   }: {
-    description: string;
-    completed: boolean;
+    titulo: string;
+    descripcion: string;
+    fecha_limite: string;
+    completada: boolean;
+    categoria_id: number;
+    usuario_id: number;
   }) {
     try {
       await Database.connect();
       const [result] = await Database.executeQuery(
-        "INSERT INTO tareas (titulo, descripcion, completada) VALUES (?, ?)",
-        [description, completed]
+        "INSERT INTO tareas (titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES (?, ?, ?, ?, ?, ?)",
+        [
+          titulo,
+          descripcion,
+          fecha_limite,
+          completada,
+          categoria_id,
+          usuario_id,
+        ]
       );
       if (result && "insertId" in result) {
         return result.insertId as number;
@@ -85,14 +50,34 @@ class TaskModel {
     }
   }
 
-  // static async deleteTask(id: string) {
-  //   try {
-  //     await Database.connect();
-  //     await Database.executeQuery('DELETE FROM tareas WHERE tarea_id = ?', [id]);
-  //   } finally {
-  //     Database.disconnect();
-  //   }
-  // }
+  // Actualizar una tarea en el modelo
+static async updateTask({
+  taskId,
+  titulo,
+  descripcion,
+  fecha_limite,
+  completada,
+  categoria_id,
+  usuario_id,
+}: {
+  taskId: string;
+  titulo: string;
+  descripcion: string;
+  fecha_limite: string;
+  completada: boolean;
+  categoria_id: number;
+  usuario_id: number;
+}) {
+  try {
+    await Database.connect();
+    await Database.executeQuery(
+      "UPDATE tareas SET titulo = ?, descripcion = ?, fecha_limite = ?, completada = ?, categoria_id = ?, usuario_id = ? WHERE tarea_id = ?",
+      [titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id, taskId]
+    );
+  } finally {
+    Database.disconnect();
+  }
+}
 
   static async taskExists(id: string) {
     await Database.connect();
