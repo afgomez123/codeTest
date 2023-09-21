@@ -9,6 +9,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const taskController_1 = require("./controllers/taskController");
 const usuariosController_1 = require("./controllers/usuariosController");
 const categoriasController_1 = require("./controllers/categoriasController");
+const cors_1 = __importDefault(require("cors")); // Importa el paquete cors
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3000;
 class Server {
@@ -18,6 +19,7 @@ class Server {
     }
     config() {
         app.use(express_1.default.json());
+        app.use((0, cors_1.default)());
         app.use(express_1.default.urlencoded({ extended: false }));
         // Configurar body-parser para manejar solicitudes JSON
         app.use(body_parser_1.default.json());

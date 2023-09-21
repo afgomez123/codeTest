@@ -4,8 +4,10 @@ import bodyParser from "body-parser";
 import { TaskController } from "./controllers/taskController";
 import { UsersController } from "./controllers/usuariosController";
 import { CategoriasController } from "./controllers/categoriasController";
+import cors from 'cors'; // Importa el paquete cors
 
 const app = express();
+
 const port = process.env.PORT || 3000;
 
 class Server {
@@ -17,6 +19,7 @@ class Server {
 
   config(): void {
     app.use(express.json());
+    app.use(cors());
     app.use(express.urlencoded({ extended: false }));
     // Configurar body-parser para manejar solicitudes JSON
     app.use(bodyParser.json());
