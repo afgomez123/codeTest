@@ -28,16 +28,11 @@ class TaskModel {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield database_1.Database.connect();
-                const [result] = yield database_1.Database.executeQuery("INSERT INTO tareas (titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES (?, ?, ?, ?, ?, ?)", [
-                    titulo,
-                    descripcion,
-                    fecha_limite,
-                    completada,
-                    categoria_id,
-                    usuario_id,
-                ]);
-                if (result && "insertId" in result) {
+                const result = yield database_1.Database.executeQuery("INSERT INTO tareas (titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES (?, ?, ?, ?, ?, ?)", [titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id]);
+                // Check if the result object contains an insertId property
+                if (result && result.insertId) {
                     return result.insertId;
+                    // You can use insertId for further processing if needed.
                 }
                 else {
                     throw new Error("No se pudo obtener el ID de inserción.");
@@ -53,7 +48,15 @@ class TaskModel {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield database_1.Database.connect();
-                yield database_1.Database.executeQuery("UPDATE tareas SET titulo = ?, descripcion = ?, fecha_limite = ?, completada = ?, categoria_id = ?, usuario_id = ? WHERE tarea_id = ?", [titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id, taskId]);
+                yield database_1.Database.executeQuery("UPDATE tareas SET titulo = ?, descripcion = ?, fecha_limite = ?, completada = ?, categoria_id = ?, usuario_id = ? WHERE tarea_id = ?", [
+                    titulo,
+                    descripcion,
+                    fecha_limite,
+                    completada,
+                    categoria_id,
+                    usuario_id,
+                    taskId,
+                ]);
             }
             finally {
                 database_1.Database.disconnect();

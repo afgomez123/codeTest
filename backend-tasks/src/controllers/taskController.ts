@@ -1,7 +1,6 @@
 // src/controllers/taskController.ts
 import express from "express";
 import { TaskModel } from "../models/taskModel";
-
 const router = express.Router();
 
 // Obtener todas las tareas

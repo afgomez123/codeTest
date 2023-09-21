@@ -29,8 +29,49 @@ class TaskModel {
   }) {
     try {
       await Database.connect();
-      const [result] = await Database.executeQuery(
+    
+
+      const result: any = await Database.executeQuery(
         "INSERT INTO tareas (titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES (?, ?, ?, ?, ?, ?)",
+        [titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id]
+      );
+      
+      // Check if the result object contains an insertId property
+      if (result && result.insertId) {
+        return result.insertId;
+        // You can use insertId for further processing if needed.
+      } else {
+        throw new Error("No se pudo obtener el ID de inserción.");
+      }
+      
+   
+    } finally {
+      Database.disconnect();
+    }
+  }
+
+  // Actualizar una tarea en el modelo
+  static async updateTask({
+    taskId,
+    titulo,
+    descripcion,
+    fecha_limite,
+    completada,
+    categoria_id,
+    usuario_id,
+  }: {
+    taskId: string;
+    titulo: string;
+    descripcion: string;
+    fecha_limite: string;
+    completada: boolean;
+    categoria_id: number;
+    usuario_id: number;
+  }) {
+    try {
+      await Database.connect();
+      await Database.executeQuery(
+        "UPDATE tareas SET titulo = ?, descripcion = ?, fecha_limite = ?, completada = ?, categoria_id = ?, usuario_id = ? WHERE tarea_id = ?",
         [
           titulo,
           descripcion,
@@ -38,46 +79,13 @@ class TaskModel {
           completada,
           categoria_id,
           usuario_id,
+          taskId,
         ]
       );
-      if (result && "insertId" in result) {
-        return result.insertId as number;
-      } else {
-        throw new Error("No se pudo obtener el ID de inserción.");
-      }
     } finally {
       Database.disconnect();
     }
   }
-
-  // Actualizar una tarea en el modelo
-static async updateTask({
-  taskId,
-  titulo,
-  descripcion,
-  fecha_limite,
-  completada,
-  categoria_id,
-  usuario_id,
-}: {
-  taskId: string;
-  titulo: string;
-  descripcion: string;
-  fecha_limite: string;
-  completada: boolean;
-  categoria_id: number;
-  usuario_id: number;
-}) {
-  try {
-    await Database.connect();
-    await Database.executeQuery(
-      "UPDATE tareas SET titulo = ?, descripcion = ?, fecha_limite = ?, completada = ?, categoria_id = ?, usuario_id = ? WHERE tarea_id = ?",
-      [titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id, taskId]
-    );
-  } finally {
-    Database.disconnect();
-  }
-}
 
   static async taskExists(id: string) {
     await Database.connect();
