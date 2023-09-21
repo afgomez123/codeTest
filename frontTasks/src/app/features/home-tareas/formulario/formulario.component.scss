@@ -11,4 +11,17 @@
     mat-form-field {
         width: 100%;
     }
+
+    .buttons-wrapper {
+      width: 100%;
+      margin: 24px 0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      align-items: center;
+
+      button {
+        border: 2px solid black;
+      }
+    }
 }

@@ -16,7 +16,7 @@ class CategoriasModel {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield database_1.Database.connect();
-                const rows = yield database_1.Database.executeQuery("SELECT * FROM categorias");
+                const rows = yield database_1.Database.executeQuery("SELECT * FROM categorias ORDER BY nombre ASC");
                 return rows;
             }
             finally {

@@ -19,7 +19,8 @@ router.get("/:id", async (req, res) => {
   const taskId = req.params.id;
   try {
     const tasks = await TaskModel.getTaskById(taskId);
-    res.json(tasks);
+
+    res.json(tasks[0]); // Primera posicion ya que el Modelo devuelve un arreglo.
   } catch (error) {
     console.error("Error al obtener tareas", error);
     res.status(500).json({ error: "Error al obtener las tareas." });

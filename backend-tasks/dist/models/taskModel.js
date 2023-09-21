@@ -95,7 +95,6 @@ class TaskModel {
                 yield database_1.Database.connect();
                 // Verificar si la tarea existe antes de intentar eliminarla
                 const taskExists = yield this.taskExists(id);
-                console.log("taskExists:", taskExists);
                 if (taskExists.length >= 1) {
                     // La tarea existe, proceder con la eliminación
                     yield database_1.Database.executeQuery("DELETE FROM tareas WHERE tarea_id = ?", [

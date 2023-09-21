@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Observable, map, finalize } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { ITareas } from 'src/app/data/interfaces/ITareas.models';
-import { TareasService } from 'src/app/data/services/tareas.service';
-import { ICategorias } from 'src/app/data/interfaces/ICategorias.models';
+import { ICategorias } from 'src/app/core/interfaces/ICategorias.models';
+import { ITareas } from 'src/app/core/interfaces/ITareas.models';
+import { TareasService } from 'src/app/core/services/tareas.service';
 
 @Component({
   selector: 'app-listar',
@@ -14,11 +14,12 @@ import { ICategorias } from 'src/app/data/interfaces/ICategorias.models';
   styleUrls: ['./listar.component.scss'],
 })
 export class ListarComponent implements OnInit {
-  tasks!: ITareas[];
-  filteredTasks!: ITareas[];
-  isDeleting?: boolean;
-  isLoading?: boolean;
-  categoryFilter$!: Observable<ICategorias[]>;
+  public categoryFilter$!: Observable<ICategorias[]>;
+  public filteredTasks!: ITareas[];
+  public isDeleting?: boolean;
+  public isError = false;
+  public isLoading?: boolean;
+  public tasks!: ITareas[];
 
   constructor(
     private tareasService: TareasService,
@@ -37,23 +38,45 @@ export class ListarComponent implements OnInit {
   getTasks(): void {
     this.isLoading = true;
 
-    this.tareasService.getTareas()
-    .pipe(finalize(() => (this.isLoading = false)))
-    .subscribe((res)=> {
-      this.tasks = [...res].sort((a, b) =>  b.tarea_id! - a.tarea_id! );
+    this.tareasService
+      .getTareas()
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe({
+        next: (res) => {
+          this.tasks = [...res].sort((a, b) => b.tarea_id! - a.tarea_id!);
 
-      this.filteredTasks = [...this.tasks];
-    })
+          this.filteredTasks = [...this.tasks];
+        },
+        error: () => {
+          this.isError = true;
+        },
+      });
   }
 
   filterTasksComplete({ checked }: { checked: boolean }) {
+    this.isLoading = true;
+
     const completada = checked ? 1 : 0;
 
-    this.filteredTasks = this.tasks.filter((task) => task.completada === Number(completada))
+    this.filteredTasks = this.tasks.filter(
+      (task) => task.completada === Number(completada)
+    );
+
+    this.isLoading = false;
   }
 
   filterByCategory({ value }: { value: number }): void {
-    this.filteredTasks  = this.tasks.filter((task) => task.categoria_id === value);
+    this.isLoading = true;
+
+    this.filteredTasks = this.tasks.filter(
+      (task) => task.categoria_id === value
+    );
+
+    this.isLoading = false;
   }
 
   resetFilter(): void {

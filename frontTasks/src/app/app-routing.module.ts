@@ -10,7 +10,12 @@ const routes: Routes = [
   {
     path: 'home-tareas',
     loadChildren: () =>
-      import('./modules/home-tareas.module').then((m) => m.HomeTareasModule),
+      import('./features/home-tareas/home-tareas.module').then((m) => m.HomeTareasModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'home-tareas',
+    pathMatch: 'full'
   },
 ];
 

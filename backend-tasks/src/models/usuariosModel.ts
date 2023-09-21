@@ -5,7 +5,7 @@ class UsuariosModel {
   static async getAllUsers() {
     try {
       await Database.connect();
-      const rows = await Database.executeQuery("SELECT * FROM usuarios");
+      const rows = await Database.executeQuery("SELECT * FROM usuarios ORDER BY nombre ASC");
       return rows as RowDataPacket[];
     } finally {
       Database.disconnect();

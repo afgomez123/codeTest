@@ -1,4 +1,10 @@
-<form *ngIf="!isLoading" class="form" novalidate [formGroup]="form" (submit)="submit(form)">
+<form
+  *ngIf="!isLoading"
+  class="form"
+  novalidate
+  [formGroup]="form"
+  (submit)="submit(form)"
+>
   <h1>Formulario Tareas</h1>
   <mat-form-field class="example-full-width">
     <mat-label>Titulo</mat-label>
@@ -30,15 +36,17 @@
     />
   </mat-form-field>
 
-  <mat-checkbox formControlName="completada" color="primary">Completada</mat-checkbox>
+  <mat-checkbox formControlName="completada" color="primary"
+    >Completada</mat-checkbox
+  >
 
   <mat-form-field>
     <mat-label>Categoria</mat-label>
     <mat-select formControlName="categoria_id">
       <ng-template ngFor let-category [ngForOf]="categorias">
         <mat-option [value]="category.categoria_id">
-        {{ category.nombre}}
-    </mat-option>
+          {{ category.nombre }}
+        </mat-option>
       </ng-template>
     </mat-select>
   </mat-form-field>
@@ -48,11 +56,21 @@
     <mat-select formControlName="usuario_id">
       <ng-template ngFor let-usuario [ngForOf]="usuarios">
         <mat-option [value]="usuario.usuario_id">
-        {{ usuario.nombre}}
-    </mat-option>
+          {{ usuario.nombre }}
+        </mat-option>
       </ng-template>
     </mat-select>
   </mat-form-field>
+<div class="buttons-wrapper">
 
+  <button
+    type="button"
+    mat-button
+    color="warn"
+    [routerLink]="['/home-tareas']"
+  >
+    Cancelar
+  </button>
   <button type="submit" mat-button color="primary">Guardar</button>
+</div>
 </form>

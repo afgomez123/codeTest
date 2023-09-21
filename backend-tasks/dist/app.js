@@ -31,8 +31,7 @@ class Server {
     }
     start() {
         const httpServer = app.listen(port, () => {
-            console.log(`Servidor en ejecución en el puerto ${port}`);
-            console.log("HTTP REST API Server running at http://localhost:" +
+            console.log("Servidor corriendo en http://localhost:" +
                 httpServer.address().port);
         });
     }
@@ -40,4 +39,3 @@ class Server {
 // Iniciar el servidor
 const server = new Server();
 server.start();
-console.log("Inicio del servidor");

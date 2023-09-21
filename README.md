@@ -12,11 +12,6 @@
 
 
 # Ejecutar servidor
-1. npm run server
+Para ejecutar el backend debemos ejecutar el comando: `npm run dev`.
 
-# compilar cambios 
-1. npx run tsc
-
-
-
-   
+Si realizas cambios en el back hay que parar el servidor y volver ejecutar esto mismo.

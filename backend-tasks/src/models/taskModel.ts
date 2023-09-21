@@ -116,10 +116,8 @@ class TaskModel {
   static async deleteTask(id: string) {
     try {
       await Database.connect();
-
       // Verificar si la tarea existe antes de intentar eliminarla
       const taskExists = await this.taskExists(id);
-      console.log("taskExists:", taskExists);
 
       if (taskExists.length >= 1) {
         // La tarea existe, proceder con la eliminación

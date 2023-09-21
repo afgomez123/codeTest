@@ -34,7 +34,7 @@ router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     const taskId = req.params.id;
     try {
         const tasks = yield taskModel_1.TaskModel.getTaskById(taskId);
-        res.json(tasks);
+        res.json(tasks[0]); // Primera posicion ya que el Modelo devuelve un arreglo.
     }
     catch (error) {
         console.error("Error al obtener tareas", error);

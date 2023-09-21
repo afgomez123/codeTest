@@ -5,7 +5,7 @@ class CategoriasModel {
   static async getAllCategorias() {
     try {
       await Database.connect();
-      const rows = await Database.executeQuery("SELECT * FROM categorias");
+      const rows = await Database.executeQuery("SELECT * FROM categorias ORDER BY nombre ASC");
       return rows as RowDataPacket[];
     } finally {
       Database.disconnect();

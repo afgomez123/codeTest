@@ -13,10 +13,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { FormularioComponent } from './home-tareas/formulario/formulario.component';
-import { HomeTareasComponent } from './home-tareas/home-tareas.component';
+import { FormularioComponent } from './formulario/formulario.component';
+import { HomeTareasComponent } from './home-tareas.component';
 import { HomeTareasRoutingModule } from './home-tareas-routing.module';
-import { ListarComponent } from './home-tareas/listar/listar.component';
+import { ListarComponent } from './listar/listar.component';
 
 @NgModule({
   declarations: [HomeTareasComponent, FormularioComponent, ListarComponent],
