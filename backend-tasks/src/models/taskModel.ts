@@ -29,13 +29,19 @@ class TaskModel {
   }) {
     try {
       await Database.connect();
-    
 
       const result: any = await Database.executeQuery(
         "INSERT INTO tareas (titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES (?, ?, ?, ?, ?, ?)",
-        [titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id]
+        [
+          titulo,
+          descripcion,
+          fecha_limite,
+          completada,
+          categoria_id,
+          usuario_id,
+        ]
       );
-      
+
       // Check if the result object contains an insertId property
       if (result && result.insertId) {
         return result.insertId;
@@ -43,8 +49,6 @@ class TaskModel {
       } else {
         throw new Error("No se pudo obtener el ID de inserción.");
       }
-      
-   
     } finally {
       Database.disconnect();
     }
@@ -82,6 +86,19 @@ class TaskModel {
           taskId,
         ]
       );
+    } finally {
+      Database.disconnect();
+    }
+  }
+
+  static async getTaskById(id: string) {
+    try {
+      await Database.connect();
+      const rows = await Database.executeQuery(
+        "SELECT * FROM tareas WHERE tarea_id = ?",
+        [id]
+      );
+      return rows as RowDataPacket[];
     } finally {
       Database.disconnect();
     }

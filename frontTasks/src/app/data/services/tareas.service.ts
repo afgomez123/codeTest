@@ -15,6 +15,10 @@ export class TareasService {
     return this.http.get<ITareas[]>('http://localhost:3000/api/tasks');
   }
 
+  public getTareasById(id: string): Observable<ITareas[]> {
+    return this.http.get<ITareas[]>(`http://localhost:3000/api/tasks/${id}`);
+  }
+
   public deleteTareas(id?:number): Observable<{message: string, id:string}> {
     return this.http.delete<{message: string, id:string}>(`http://localhost:3000/api/tasks/${id}`);
   }

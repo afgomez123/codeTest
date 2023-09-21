@@ -29,6 +29,18 @@ router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(500).json({ error: "Error al obtener las tareas." });
     }
 }));
+// Obtener todas las tareas
+router.get("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const taskId = req.params.id;
+    try {
+        const tasks = yield taskModel_1.TaskModel.getTaskById(taskId);
+        res.json(tasks);
+    }
+    catch (error) {
+        console.error("Error al obtener tareas", error);
+        res.status(500).json({ error: "Error al obtener las tareas." });
+    }
+}));
 // Crear una nueva tarea
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id, } = req.body;

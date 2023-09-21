@@ -28,7 +28,14 @@ class TaskModel {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 yield database_1.Database.connect();
-                const result = yield database_1.Database.executeQuery("INSERT INTO tareas (titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES (?, ?, ?, ?, ?, ?)", [titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id]);
+                const result = yield database_1.Database.executeQuery("INSERT INTO tareas (titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES (?, ?, ?, ?, ?, ?)", [
+                    titulo,
+                    descripcion,
+                    fecha_limite,
+                    completada,
+                    categoria_id,
+                    usuario_id,
+                ]);
                 // Check if the result object contains an insertId property
                 if (result && result.insertId) {
                     return result.insertId;
@@ -57,6 +64,18 @@ class TaskModel {
                     usuario_id,
                     taskId,
                 ]);
+            }
+            finally {
+                database_1.Database.disconnect();
+            }
+        });
+    }
+    static getTaskById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                yield database_1.Database.connect();
+                const rows = yield database_1.Database.executeQuery("SELECT * FROM tareas WHERE tarea_id = ?", [id]);
+                return rows;
             }
             finally {
                 database_1.Database.disconnect();

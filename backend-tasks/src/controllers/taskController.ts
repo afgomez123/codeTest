@@ -14,6 +14,18 @@ router.get("/", async (req, res) => {
   }
 });
 
+// Obtener todas las tareas
+router.get("/:id", async (req, res) => {
+  const taskId = req.params.id;
+  try {
+    const tasks = await TaskModel.getTaskById(taskId);
+    res.json(tasks);
+  } catch (error) {
+    console.error("Error al obtener tareas", error);
+    res.status(500).json({ error: "Error al obtener las tareas." });
+  }
+});
+
 // Crear una nueva tarea
 router.post("/", async (req, res) => {
   const {
