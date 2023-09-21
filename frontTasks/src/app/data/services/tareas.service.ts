@@ -11,20 +11,24 @@ import { ITareas } from '../interfaces/ITareas.models';
 export class TareasService {
   constructor(private http: HttpClient) {}
 
-  public getTareas(): Observable<ITareas> {
-    return this.http.get<ITareas>('http://localhost:3000/api/tasks');
+  public getTareas(): Observable<ITareas[]> {
+    return this.http.get<ITareas[]>('http://localhost:3000/api/tasks');
   }
 
-  public getUsuarios(): Observable<IUsuarios> {
-    return this.http.get<IUsuarios>('http://localhost:3000/api/users');
+  public deleteTareas(id?:number): Observable<{message: string, id:string}> {
+    return this.http.delete<{message: string, id:string}>(`http://localhost:3000/api/tasks/${id}`);
   }
 
-  public getCategorias(): Observable<ICategorias> {
-    return this.http.get<ICategorias>('http://localhost:3000/api/categories');
+  public getUsuarios(): Observable<IUsuarios[]> {
+    return this.http.get<IUsuarios[]>('http://localhost:3000/api/users');
   }
 
-  public setTareas(data: ITareas): Observable<ITareas> {
-    return this.http.post('http://localhost:3000/api/tasks', data);
+  public getCategorias(): Observable<ICategorias[]> {
+    return this.http.get<ICategorias[]>('http://localhost:3000/api/categories');
+  }
+
+  public setTareas(data: ITareas): Observable<{message: string, id:string}> {
+    return this.http.post<{message: string, id:string}>('http://localhost:3000/api/tasks', data);
   }
 
   public setUpdateTareas(data: ITareas): Observable<ITareas> {

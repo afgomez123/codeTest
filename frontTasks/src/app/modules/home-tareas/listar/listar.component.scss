@@ -1,0 +1,39 @@
+@mixin window($max-width) {
+  @media (max-width: $max-width) {
+    @content;
+  }
+}
+
+.task-list {
+  height: 100%;
+  width: 80%;
+  margin: 0 auto;
+
+  .filters-wrapper {
+    padding: 24px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    align-items: center;
+
+    @include window(570px) {
+      flex-direction: column;
+    }
+  }
+
+  .task-wrapper {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    overflow: auto;
+    height: calc(100% - 90px);
+
+    .task-card {
+      background: white;
+      max-width: 250px;
+      width: 250px;
+      height: 250px;
+    }
+  }
+}

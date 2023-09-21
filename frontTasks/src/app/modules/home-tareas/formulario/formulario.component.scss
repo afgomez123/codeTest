@@ -1,0 +1,14 @@
+.form {
+    padding: 24px 0;
+    width: 50%;
+    display: flex;
+    flex-flow: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+
+    mat-form-field {
+        width: 100%;
+    }
+}

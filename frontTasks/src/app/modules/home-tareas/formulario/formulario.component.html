@@ -1,1 +1,58 @@
-<p>formulario works!</p>
+<form *ngIf="!isLoading" class="form" novalidate [formGroup]="form" (submit)="submit(form)">
+  <h1>Formulario Tareas</h1>
+  <mat-form-field class="example-full-width">
+    <mat-label>Titulo</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="titulo"
+      placeholder="Titulo de la tarea"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Descripcion</mat-label>
+    <input
+      type="text"
+      matInput
+      formControlName="descripcion"
+      placeholder="Descripcion de la tarea"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Fecha Limite</mat-label>
+    <input
+      type="date"
+      matInput
+      formControlName="fecha_limite"
+      placeholder="fecha_limite de la tarea"
+    />
+  </mat-form-field>
+
+  <mat-checkbox formControlName="completada" color="primary">Completada</mat-checkbox>
+
+  <mat-form-field>
+    <mat-label>Categoria</mat-label>
+    <mat-select formControlName="categoria_id">
+      <ng-template ngFor let-category [ngForOf]="categorias">
+        <mat-option [value]="category.categoria_id">
+        {{ category.nombre}}
+    </mat-option>
+      </ng-template>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Usuarios</mat-label>
+    <mat-select formControlName="usuario_id">
+      <ng-template ngFor let-usuario [ngForOf]="usuarios">
+        <mat-option [value]="usuario.usuario_id">
+        {{ usuario.nombre}}
+    </mat-option>
+      </ng-template>
+    </mat-select>
+  </mat-form-field>
+
+  <button type="submit" mat-button color="primary">Guardar</button>
+</form>

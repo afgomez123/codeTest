@@ -1,7 +1,12 @@
-<button mat-fab color="primary" class="red-button" [routerLink]="['/home-tareas/formulario']">
-  <mat-icon>add</mat-icon>
-</button>
+<section class="tareas-container">
+  <router-outlet></router-outlet>
 
-<h1>home-tareas works!</h1>
-
-
+  <button
+    mat-fab
+    color="primary"
+    class="red-button"
+    [routerLink]="['/home-tareas/formulario']"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</section>
