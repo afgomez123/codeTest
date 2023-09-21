@@ -1,4 +1,3 @@
-// src/utils/Database.ts
 import mysql, { RowDataPacket } from 'mysql2/promise';
 
 class Database {
