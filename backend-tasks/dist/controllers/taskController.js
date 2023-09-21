@@ -55,7 +55,7 @@ router.put("/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         // Verificar si la tarea existe antes de intentar actualizarla
         const taskExists = yield taskModel_1.TaskModel.taskExists(taskId);
-        if (taskExists.length >= 1) {
+        if (taskExists.length) {
             // La tarea existe, proceder con la actualización
             yield taskModel_1.TaskModel.updateTask({
                 taskId,

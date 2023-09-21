@@ -56,7 +56,7 @@ router.put("/:id", async (req, res) => {
     // Verificar si la tarea existe antes de intentar actualizarla
     const taskExists = await TaskModel.taskExists(taskId);
 
-    if (taskExists.length >= 1) {
+    if (taskExists.length) {
       // La tarea existe, proceder con la actualización
       await TaskModel.updateTask({
         taskId,
