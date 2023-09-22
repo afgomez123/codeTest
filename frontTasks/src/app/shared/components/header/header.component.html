@@ -1,5 +1,5 @@
-  <mat-toolbar>
-    <span>
-      <a class="menu" [routerLink]="['/home-tareas/']">Mis tareas</a>
-    </span>
-  </mat-toolbar>
+<mat-toolbar>
+  <span>
+    <a class="menu" (click)="goToPageChild()">{{ title }}</a>
+  </span>
+</mat-toolbar>

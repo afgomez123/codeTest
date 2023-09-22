@@ -48,7 +48,6 @@ export class ListarComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.tasks = [...res].sort((a, b) => b.tarea_id! - a.tarea_id!);
-
           this.filteredTasks = [...this.tasks];
         },
         error: () => {

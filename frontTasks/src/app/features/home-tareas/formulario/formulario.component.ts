@@ -98,7 +98,7 @@ export class FormularioComponent implements OnInit {
     });
   }
 
-  submit({ value }: FormGroup): void {
+  public submit({ value }: FormGroup): void {
     this.isLoading = true;
     // Casteando datos
     value.completada = Boolean(value.completada) ? 1 : 0;

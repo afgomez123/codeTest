@@ -23,7 +23,7 @@ CREATE TABLE tareas (
     titulo VARCHAR(255) NOT NULL,
     descripcion TEXT,
     fecha_limite DATE,
-    completada BOOLEAN NOT NULL DEFAULT 0,
+    completada INT,
     categoria_id INT,
     usuario_id INT,
     FOREIGN KEY (categoria_id) REFERENCES categorias(categoria_id),
