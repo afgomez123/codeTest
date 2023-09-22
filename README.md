@@ -1,5 +1,8 @@
 # codeTest
 
+<img width="1000" alt="image" src="https://github.com/afgomez123/codeTest/assets/36038728/f27272bb-d1e4-4e3c-b2e4-981cb1103108">
+
+
 # Arquitectura
 1. Mysql database
 2. Node v16.20.1
