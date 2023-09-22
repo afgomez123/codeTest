@@ -30,34 +30,21 @@ CREATE TABLE tareas (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(usuario_id)
 );
 
+Crear categorias 
+INSERT INTO tareas.categorias (categoria_id, nombre) VALUES(1, 'Diseno');
+INSERT INTO tareas.categorias (categoria_id, nombre) VALUES(2, 'Analisis');
+INSERT INTO tareas.categorias (categoria_id, nombre) VALUES(3, 'Desarrollo');
+INSERT INTO tareas.categorias (categoria_id, nombre) VALUES(4, 'Pruebas');
 
-INSERT INTO tareas.categorias (categoria_id, nombre) VALUES(1, 'Backlog');
-INSERT INTO tareas.categorias (categoria_id, nombre) VALUES(2, 'Todo');
-INSERT INTO tareas.categorias (categoria_id, nombre) VALUES(3, 'Done');
-INSERT INTO tareas.categorias (categoria_id, nombre) VALUES(4, 'In progress');
-INSERT INTO tareas.categorias (categoria_id, nombre) VALUES(5, 'Blocked');
-INSERT INTO tareas.categorias (categoria_id, nombre) VALUES(6, 'Other');
-
-
+Crear usuarios
 INSERT INTO tareas.usuarios (usuario_id, nombre, email) VALUES(1, 'Andres', 'afgomez@hotmail.com');
 INSERT INTO tareas.usuarios (usuario_id, nombre, email) VALUES(2, 'Carlos ', 'carlo@gmail.com');
 INSERT INTO tareas.usuarios (usuario_id, nombre, email) VALUES(3, 'Yennifer', 'yen@hotmail.com');
 
-
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(1, 'Bugg banner', 'Please fix the bugg in the banner , the images do not moves in 2 second', '2023-09-19', 0, 1, 1);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(2, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 2, 2);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(3, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 3, 3);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(4, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 4, 1);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(5, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 5, 2);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(6, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 6, 3);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(7, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 1, 1);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(8, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 2, 2);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(9, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 3, 3);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(10, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 4, 1);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(11, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 5, 2);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(13, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 1, 1);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(14, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 2, 2);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(15, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-28', 0, 1, 3);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(16, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 1, 1);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(17, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-24', 0, 2, 2);
-INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(18, 'Bugg banner2', 'Please fix the bugg in the banner , test 2', '2023-09-30', 0, 1, 3);
+Crear tareas
+INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(1, 'Probar Task APP', 'Probar toda la app', '2023-09-25', 0, 1, 1);
+INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(2, 'Diseñar nuevos modulos', 'Diseñar nuevos modulos para la aplicacion de task APP', '2023-09-30', 0, 2, 2);
+INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(3, 'Desarrollar TaskView', 'Desarrollar modulo para visualizar tareas sin necesidad de edicion', '2023-10-01', 0, 3, 3);
+INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(4, 'Desarrollar autenticacion', 'Agregar modulo de autenticacion, no requerida, solo cuando se quiera guardar la informacion para usuarios.', '2023-10-10', 0, 4, 1);
+INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(5, 'Diseñar login', 'Diseñar pantalla de login', '2023-10-15', 1, 1, 2);
+INSERT INTO tareas.tareas (tarea_id, titulo, descripcion, fecha_limite, completada, categoria_id, usuario_id) VALUES(6, 'Crear nuevos usuarios', 'Crear nuevos usuarios en la base de datos', '2023-10-12', 0, 2, 3);
