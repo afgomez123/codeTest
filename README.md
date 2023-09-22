@@ -12,6 +12,7 @@
 # En la carpeta del proyecto backend-tasks se encuentra un archivo con los scrips para la creacion de la base de datos y de las tablas llamado db.sql.
 
 # Una vez en la carpeta de de cada proyecto ejecutar npm i para la instalacion de las dependencias.
+# Revisar README.md en la carpeta frontTasks
 
 
 # Ejecutar servidor
