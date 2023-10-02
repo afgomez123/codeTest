@@ -4,11 +4,12 @@ import { Observable, of, tap } from 'rxjs';
 import { ICategorias } from '../interfaces/ICategorias.models';
 import { IUsuarios } from '../interfaces/IUsuarios.models';
 import { ITareas } from '../interfaces/ITareas.models';
+import { ITareasService } from '../interfaces/tareas-service.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TareasService {
+export class TareasService implements ITareasService {
   private usuarios?: IUsuarios[];
   private categorias?: ICategorias[];
 

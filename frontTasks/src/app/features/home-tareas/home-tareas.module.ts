@@ -17,6 +17,8 @@ import { FormularioComponent } from './formulario/formulario.component';
 import { HomeTareasComponent } from './home-tareas.component';
 import { HomeTareasRoutingModule } from './home-tareas-routing.module';
 import { ListarComponent } from './listar/listar.component';
+import { TareasService } from 'src/app/core/services/tareas.service';
+import { TAREAS_SERVICE_TOKEN } from 'src/app/core/services/tareas-service.token';
 
 @NgModule({
   declarations: [HomeTareasComponent, FormularioComponent, ListarComponent],
@@ -34,6 +36,12 @@ import { ListarComponent } from './listar/listar.component';
     MatSnackBarModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+  ],
+  providers: [
+    {
+      provide: TAREAS_SERVICE_TOKEN,
+      useClass: TareasService, // Use the concrete service here
+    },
   ],
 })
 export class HomeTareasModule {}
