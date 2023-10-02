@@ -5,14 +5,28 @@
   </div>
 
   <!-- Filtros -->
+
   <ng-template [ngIf]="(categoryFilter$ | async) && !isDeleting">
     <section class="filters-wrapper">
       <mat-form-field>
-        <mat-label>Categorias</mat-label>
-        <mat-select (selectionChange)="filterByCategory($event)">
-          <ng-template ngFor let-category [ngForOf]="categoryFilter$ | async">
+        <mat-label for="mySelect">Categorias</mat-label>
+        <mat-select #categoriaSelect id="mySelect" (selectionChange)="filterByCategory($event)">
+
+          <ng-template ngFor let-category [ngForOf]="categoryFilter$ | async" let-i="index">
             <mat-option [value]="category.categoria_id">
               {{ category.nombre }}
+            </mat-option>
+          </ng-template>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Usuarios</mat-label>
+        <mat-select #usuarioSelect (selectionChange)="filterByUser($event)">
+          <ng-template ngFor let-user [ngForOf]="userFilter$ | async">
+            <mat-option [value]="user.usuario_id">
+              {{ user.nombre }}
             </mat-option>
           </ng-template>
         </mat-select>
@@ -23,6 +37,7 @@
         (change)="filterTasksComplete($event)"
         color="primary"
         [checked]="false"
+        #completeToggle
       >
         Completadas
       </mat-slide-toggle>
@@ -32,6 +47,7 @@
       </button>
     </section>
   </ng-template>
+
 
   <!-- Listado -->
   <div class="task-wrapper">
